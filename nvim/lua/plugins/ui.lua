@@ -114,7 +114,15 @@ return {
       require("bufferline").setup({
         options = {
           diagnostics = "nvim_lsp",
-          separator_style = "slant", -- "thin", "slant", or "padded_slant"
+          diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            local s = " "
+            for e, n in pairs(diagnostics_dict) do
+              local sym = e == "error" and " " or (e == "warning" and " " or " ")
+              s = s .. n .. sym
+            end
+            return s
+          end,
+          separator_style = "thin", -- "thin", "slant", or "padded_slant"
           show_buffer_close_icons = false,
           show_close_icon = false,
           always_show_bufferline = true,
