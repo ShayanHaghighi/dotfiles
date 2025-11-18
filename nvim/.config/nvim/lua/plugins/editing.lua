@@ -1,5 +1,8 @@
 return {
   {
+    "mg979/vim-visual-multi",
+  },
+  {
     "tpope/vim-surround",
   },
   { "christoomey/vim-tmux-navigator", lazy = false },
