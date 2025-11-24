@@ -5,5 +5,6 @@ starship=.config/starship
 tmux=.config/tmux
 zsh/zshenv=
 zsh/zshrc=.config/zsh
+ghostty=.config/ghostty
 
 
