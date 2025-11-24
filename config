@@ -1,0 +1,9 @@
+tools=.local/bin/
+eza=.config/eza
+nvim=.config/nvim
+starship=.config/starship
+tmux=.config/tmux
+zsh/zshenv=
+zsh/zshrc=.config/zsh
+
+

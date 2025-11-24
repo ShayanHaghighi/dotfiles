@@ -122,7 +122,7 @@ return {
             end
             return s
           end,
-          separator_style = "thin", -- "thin", "slant", or "padded_slant"
+          separator_style = "slant", -- "thin", "slant", or "padded_slant"
           show_buffer_close_icons = false,
           show_close_icon = false,
           always_show_bufferline = true,

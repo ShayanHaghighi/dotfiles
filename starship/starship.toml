@@ -10,6 +10,7 @@ $directory\
 
 $character
 """
+right_format="([](fg:surface0)$python[](fg:surface0))"
 
 add_newline=false
 
@@ -110,8 +111,8 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:base)]($style)'
 
 [python]
 symbol = ""
-style = "bg:#69e8ff"
-format = '[[ $symbol ($version) ](fg:#69e8ff bg:base)]($style)'
+style = "fg:blue bg:surface0"
+format = '([ $symbol$virtualenv ]($style))'
 python_binary = 'python3'
 
 
