@@ -23,3 +23,6 @@ export EZA_ICONS_AUTO=always
 # export EZA_CONFIG_DIR="$XDG_CONFIG_HOME/eza"
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+export HISTFILE="$HOME/.zsh_history"
+export SAVEHIST=1
+echo "ran .zshenv"
