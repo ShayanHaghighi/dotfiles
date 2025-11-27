@@ -1,0 +1,18 @@
+#!/bin/bash
+query="$1"
+NOTE_DIR="$XDG_CONFIG_HOME/cheat/cheatsheets/personal/"
+res=$(cheat $1)
+
+if [[ ! $? == 0 ]]; then
+    res=$(curl -s cht.sh/$1)
+clean_string=$(echo "$res" | sed 's/\x1b\[[0-9;]*m//g')
+    if [[ "$1" == */* ]]; then
+        mkdir -p "$NOTE_DIR/$(dirname "$1")"  
+    fi
+
+    printf "%s" "$res" > "$NOTE_DIR/$1"
+    res=$(printf "saved to dir: %s\n %s" "$1" "$res" )
+    echo "saved to dir: $1"
+fi
+
+printf "%s" "$res" | batcat -l markdown
