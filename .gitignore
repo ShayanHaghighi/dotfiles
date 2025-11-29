@@ -1,3 +1,4 @@
 system.bash
 .zcompdump
-tmux/plugins/
+tmux/plugins/*
+tools/tmux/plugins

@@ -1,0 +1,26 @@
+command = /bin/zsh
+
+theme = current-theme.conf
+
+cursor-style = block
+shell-integration-features = no-cursor
+
+window-decoration = none
+# window-padding-x =10
+# window-padding-y = 10
+
+background-image = ~/.config/ghostty/assets/background-blur.png
+background-image-opacity = 0.02
+background-image-fit = cover
+background-blur = 200
+background-opacity = 1.0
+
+keybind = ctrl+shift+K=text:clear\x0d
+keybind = ctrl+b=text:cd $(git rev-parse --show-toplevel)\x0d
+keybind = ctrl+shift+a=text:tmux attach-session\x0d
+
+font-thicken = false
+font-family = "0xProto Nerd Font"
+
+
+

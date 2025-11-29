@@ -1,0 +1,11 @@
+# Very close to what you posted, actually.
+# 
+# To get the assigned value, or `default` if it's missing:
+
+ FOO="${VARIABLE:-default}"  # If variable not set or null, use default.
+
+# Or to assign `default` to `VARIABLE` at the same time:
+
+ FOO="${VARIABLE:=default}"  # If variable not set or null, set it to default.
+
+# [Andrew McGregor] [so/q/2013547] [cc by-sa 3.0]

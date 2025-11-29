@@ -1,11 +1,11 @@
-[submodule "zsh/zshrc/plugins/zsh-syntax-highlighting"]
-	path = zsh/zshrc/plugins/zsh-syntax-highlighting
+[submodule "shell/.config/zsh/plugins/zsh-syntax-highlighting"]
+	path = shell/.config/zsh/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "zsh/zshrc/plugins/zsh-autocomplete"]
-	path = zsh/zshrc/plugins/zsh-autocomplete
+[submodule "shell/.config/zsh/plugins/zsh-autocomplete"]
+	path = shell/.config/zsh/plugins/zsh-autocomplete
 	url = https://github.com/marlonrichert/zsh-autocomplete.git
-[submodule "zsh/zshrc/plugins/zsh-completions"]
-	path = zsh/zshrc/plugins/zsh-completions
+[submodule "shell/.config/zsh/plugins/zsh-completions"]
+	path = shell/.config/zsh/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
 [submodule "cheat/cheatsheets"]
 	path = cheat/cheatsheets

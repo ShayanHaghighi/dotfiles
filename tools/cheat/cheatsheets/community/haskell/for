@@ -1,0 +1,25 @@
+{-
+ - There are a few options. First, you can rewrite the problem with naive
+ - recursion:
+ -}
+
+ loop :: Int -> Int
+ loop n = loop' n 0
+   where loop' 0 a = a
+         loop' n a = loop' (n - 1) (1 - a)
+
+{- Next, you can restate recursion as a fold: -}
+
+ loop :: Int -> Int
+ loop n = foldr (\a _ -> 1 - a) 0 [0..n]
+
+{- Or you can use `State` to simulate a for loop: -}
+
+ import Control.Monad
+ import Control.Monad.State
+
+ loop :: Int -> Int
+ loop n = execState (forM_ [0..n] 
+                       (\_ -> modify (\a -> 1 - a))) 0
+
+{- [user2297560] [so/q/39131812] [cc by-sa 3.0] -}

@@ -1,0 +1,27 @@
+--[[
+   [ You already have the solution in the question the only way is to
+   [ iterate the whole table with `pairs(..)`.
+   ]]
+
+ function tablelength(T)
+   local count = 0
+   for _ in pairs(T) do count = count + 1 end
+   return count
+ end
+
+--[[
+   [ Also, notice that the "#" operator's definition is a bit more
+   [ complicated than that. Let me illustrate that by taking this table:
+   ]]
+
+ t = {1,2,3}
+ t[5] = 1
+ t[9] = 1
+
+--[[
+   [ According to the manual, **any of** 3, 5 and 9 are valid results for
+   [ `#t`. The only sane way to use it is with arrays of one contiguous
+   [ part without nil values.
+   [ 
+   [ [u0b34a0f6ae] [so/q/2705793] [cc by-sa 3.0]
+   ]]

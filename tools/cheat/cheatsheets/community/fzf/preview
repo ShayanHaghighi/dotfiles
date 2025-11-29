@@ -1,0 +1,5 @@
+# Run a preview command with fzf, specifiy a command inside the double quotes.
+fzf --preview "file {}"
+
+# Find files from find command and preview it with fzf
+find . -type f -name "*.txt" | fzf --preview "head {}"

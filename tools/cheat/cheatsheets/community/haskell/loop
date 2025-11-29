@@ -1,0 +1,32 @@
+{-
+ - You could define a recursive function that prints "a string" n times
+ - (n being the parameter of the function), like this:
+ -}
+
+ printStringNTimes 0 = return ()
+ printStringNTimes n =
+  do
+   putStrLn "a string"
+   printStringNTimes (n-1)
+
+ main = printStringNTimes 10
+
+{-
+ - A somewhat more general approach would be to define a function that
+ - repeats any IO action n times:
+ -}
+
+ repeatNTimes 0 _ = return ()
+ repeatNTimes n action =
+  do
+   action
+   repeatNTimes (n-1) action
+
+ main = repeatNTimes 10 (putStrLn "a string")
+
+{-
+ - The above function already exists in `Control.Monad` under the name
+ - `replicateM_`.
+ - 
+ - [sepp2k] [so/q/16004365] [cc by-sa 3.0]
+ -}
