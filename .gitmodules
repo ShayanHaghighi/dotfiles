@@ -7,6 +7,3 @@
 [submodule "shell/.config/zsh/plugins/zsh-completions"]
 	path = shell/.config/zsh/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
-[submodule "tools/cheat/cheatsheets"]
-	path = tools/cheat/cheatsheets
-	url = https://github.com/ShayanHaghighi/cheatsheets.git
