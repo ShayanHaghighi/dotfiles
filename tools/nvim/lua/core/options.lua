@@ -14,41 +14,20 @@ vim.o.smartcase = true
 vim.o.ignorecase = true
 vim.o.hlsearch = false
 vim.diagnostic.config({
-  virtual_text = true,
-  virtual_lines = { current_line = true },
+  virtual_text = { virt_text_pos = "right_align" },
+  virtual_lines = false,
   underline = true,
-  update_in_insert = true
+  update_in_insert = true,
 })
 
+vim.opt.foldlevelstart = 99
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.filetype.add({
   extension = {
     ghostty = "cfg",
-  }
+  },
 })
-vim.keymap.set('o', 'i/', ':<C-u>normal! T/vt/<CR>', { silent = true })
-vim.keymap.set('o', 'a/', ':<C-u>normal! F/vf/<CR>', { silent = true })
 
-vim.keymap.set('v', 'i/', ':<C-u>normal! T/vt/<CR>', { silent = true })
-vim.keymap.set('v', 'a/', ':<C-u>normal! F/vf/<CR>', { silent = true })
--- uncomment to make default background transparent
--- vim.api.nvim_create_autocmd("ColorScheme", {
---   callback = function()
---     local groups = {
---       "Normal",
---       "NormalNC",
---       "NormalFloat",
---       "FloatBorder",
---       "SignColumn",
---       "CursorLine",
---       "LineNr",
---       "FoldColumn",
---       "MsgArea",
---       "TelescopeNormal",
---       "TelescopeBorder"
---     }
---     for _, group in ipairs(groups) do
---       vim.cmd("highlight " .. group .. " guibg=NONE ctermbg=NONE")
---     end
---   end,
--- })
---
+vim.opt.spell = true
+vim.opt.spelllang = "en_gb"

@@ -1,70 +1,65 @@
 return {
   {
+    enabled = false,
     "RRethy/base16-nvim",
     lazy = false,
-    config = function ()
-      local base16 = require('base16-colorscheme')
+    config = function()
+      local base16 = require("base16-colorscheme")
       base16.setup({
 
         -- Start flavours
-base00 = '#1e1e2e',
-base01 = '#181825',
-base02 = '#313244',
-base03 = '#45475a',
-base04 = '#585b70',
-base05 = '#cdd6f4',
-base06 = '#f5e0dc',
-base07 = '#b4befe',
-base0F = '#f38ba8',
-base09 = '#fab387',
-base0A = '#f9e2af',
-base0B = '#a6e3a1',
-base0C = '#94e2d5',
-base0D = '#89b4fa',
-base0E = '#cba6f7',
-base08 = '#f2cdcd'
+        base00 = "#1e1e2e",
+        base01 = "#181825",
+        base02 = "#313244",
+        base03 = "#45475a",
+        base04 = "#585b70",
+        base05 = "#cdd6f4",
+        base06 = "#f5e0dc",
+        base07 = "#b4befe",
+        base08 = "#f38ba8",
+        base09 = "#fab387",
+        base0A = "#f9e2af",
+        base0B = "#a6e3a1",
+        base0C = "#94e2d5",
+        base0D = "#89b4fa",
+        base0E = "#cba6f7",
+        base0F = "#f2cdcd",
         -- End flavours
       })
       base16.with_config({
         telescope = true,
+        indentblankline = true,
+        notify = true,
+        ts_rainbow = true,
         cmp = true,
-        lualine = true,
-        nvim_tree = true
+        illuminate = true,
+        dapui = true,
       })
-      --vim.cmd('colorscheme base16')
-
-    end
+    end,
+  },
+  {
+    "catppuccin/nvim",
+    integrations = {
+      cmp = true,
+      gitsigns = true,
+      nvimtree = true,
+    },
+    flavor = "mocha",
+    float = {
+      transparent = true,
+    },
+    transparent_background = true,
+    lazy = false,
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme catppuccin-mocha")
+    end,
   },
   {
     "nvim-tree/nvim-tree.lua",
     config = function()
       local nvim_tree = require("nvim-tree")
-      local function on_attach(bufnr)
-        local api = require("nvim-tree.api")
-
-        api.config.mappings.default_on_attach(bufnr)
-
-        -- TODO: fix
-        vim.keymap.set("n", "<leader>t", api.tree.focus, { buffer = bufnr, desc = "Focus NvimTree" })
-      end
-      local function link(from, to)
-        vim.api.nvim_set_hl(0, from, { link = to })
-      end
-
-      -- Inherit from standard groups
-      link("NvimTreeNormal", "Normal")
-      link("NvimTreeNormalNC", "Normal")
-      link("NvimTreeFolderName", "Directory")
-      link("NvimTreeFolderIcon", "Directory")
-      link("NvimTreeOpenedFolderName", "Directory")
-      link("NvimTreeEmptyFolderName", "Directory")
-      link("NvimTreeIndentMarker", "Comment")
-      link("NvimTreeRootFolder", "Title")
-      link("NvimTreeExecFile", "String")
-      link("NvimTreeSpecialFile", "Identifier")
-      link("NvimTreeGitStaged", "GitSignsStaged") -- if you use GitSigns
-      link("NvimTreeGitDirty", "GitSignsChange")
-      link("NvimTreeGitNew", "GitSignsAdd")
       nvim_tree.setup({
         on_attach = on_attach,
         update_cwd = true,
@@ -111,8 +106,8 @@ base08 = '#f2cdcd'
                 staged = "S",
                 unmerged = "",
                 renamed = "➜",
-                untracked = "★",
-                deleted = "",
+                untracked = "U",
+                deleted = "D",
                 ignored = "◌",
               },
             },
@@ -121,12 +116,12 @@ base08 = '#f2cdcd'
       })
 
       vim.cmd([[
-  hi NvimTreeGitNewIcon guifg=#ff4444 gui=bold
+      hi NvimTreeGitNewIcon guifg=#ff4444
 
-  hi NvimTreeGitStagedIcon guifg=#00ff7f gui=bold
+      hi NvimTreeGitStagedIcon guifg=#00ff7f
 
-  hi NvimTreeGitDirtyIcon guifg=#ffb347 gui=bold
-    ]])
+      hi NvimTreeGitDirtyIcon guifg=#ffb347
+        ]])
     end,
   },
   {
@@ -149,29 +144,11 @@ base08 = '#f2cdcd'
       require("lualine").setup({ options = { theme = "base16" } })
     end,
   }, -- nvim status line
-  {
-    "catppuccin/nvim",
-    integrations = {
-      cmp = true,
-      gitsigns = true,
-      nvimtree = true,
-    },
-    flavor = "mocha",
-    float = {
-      transparent = true,
-    },
-    transparent_background = true,
-    lazy = false,
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      vim.cmd("colorscheme catppuccin-mocha")
-    end,
-  },
+
   { -- bufferlines (tabs)
     "akinsho/bufferline.nvim",
     version = "*",
-    dependencies ={     "RRethy/base16-nvim", "nvim-tree/nvim-web-devicons" },
+    dependencies = { "RRethy/base16-nvim", "nvim-tree/nvim-web-devicons" },
     config = function()
       require("bufferline").setup({
         options = {
@@ -218,5 +195,14 @@ base08 = '#f2cdcd'
       vim.keymap.set("n", "<leader><leader>k", require("smart-splits").swap_buf_up)
       vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
     end,
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {
+      indent = { char = "│" },
+      scope = { enabled = true },
+    },
   },
 }

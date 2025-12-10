@@ -1,165 +1,64 @@
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = { "lua", "python", "javascript", "typescript", "html", "css" },
-        highlight = { enable = true },
-        indent = { enable = true },
-      })
-    end,
-  },
+
   {
     "neovim/nvim-lspconfig",
   },
   {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "saadparwaiz1/cmp_luasnip",
-      "L3MON4D3/LuaSnip",
-      "rafamadriz/friendly-snippets",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "onsails/lspkind.nvim",
-      "ray-x/lsp_signature.nvim",
-    },
+    "williamboman/mason.nvim",
     config = function()
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
-      local lspkind = require("lspkind")
-
-      require("luasnip.loaders.from_vscode").lazy_load()
-
-      cmp.setup({
-        completion = { autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged } },
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = {
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.confirm({ select = true })
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<Up>"] = cmp.mapping.select_prev_item(),
-          ["<Down>"] = cmp.mapping.select_next_item(),
-          ["<C-p>"] = cmp.mapping.select_prev_item(),
-          ["<C-n>"] = cmp.mapping.select_next_item(),
-          ["<C-Space>"] = cmp.mapping.complete(),
-        },
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "nvim_lsp_signature_help" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-        }),
-        formatting = {
-          format = lspkind.cmp_format({
-            mode = "symbol_text",
-            maxwidth = 50,
-            ellipsis_char = "...",
-          }),
-        },
-        sorting = {
-          priority_weight = 2,
-          comparators = {
-            cmp.config.compare.locality,
-            cmp.config.compare.exact,
-            cmp.config.compare.score,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
-          },
-        },
-      })
-
-      -- ===== LSP setup =====
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      vim.lsp.config.lua_ls = {
-        cmd = { "lua-language-server" },
-        capabilities = capabilities,
-        settings = {
-          Lua = { diagnostics = { globals = { "vim" } } },
-        },
-      }
-
-      vim.lsp.config.ts_ls = {
-        cmd = { "typescript-language-server", "--stdio" },
-        capabilities = capabilities,
-      }
-
-      -- Use basedpyright for smarter Python completion
-      vim.lsp.config.basedpyright = {
-        cmd = { "basedpyright-langserver", "--stdio" },
-        capabilities = capabilities,
-      }
-
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "lua", "javascript", "typescript", "python" },
-        callback = function()
-          local cfg = vim.lsp.config[vim.bo.filetype .. "_ls"]
-              or (vim.bo.filetype == "python" and vim.lsp.config.basedpyright)
-          if cfg then
-            vim.lsp.start(cfg)
-          end
-        end,
-      })
-
-      -- ===== Signature hints =====
-      require("lsp_signature").setup({
-        bind = true,
-        hint_enable = true,
-        hint_prefix = " ",
-        handler_opts = { border = "rounded" },
-      })
+      require("mason").setup()
     end,
   },
-  { "williamboman/mason.nvim", config = true },
-
   {
-    "HiPhish/nvim-ts-rainbow2",
-    -- dependencies = { "nvim-treesitter/nvim-treesitter" },
-    -- config = function()
-    --   require("nvim-treesitter.configs").setup({
-    --     --[[ highlight = { enable = true }, ]]
-    --     rainbow = {
-    --       enable = true,
-    --       strategy = require("ts-rainbow").strategy.global,
-    --       -- query = { "rainbow-parens", html = "rainbow-tags" },
-    --       query = "rainbow-parens",
-    --     },
-    --   })
-    -- end,
-  },
+    "mason-org/mason-lspconfig.nvim",
 
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    opts = {
-      indent = { char = "│" },
-      scope = { enabled = true },
+    opts = {},
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
     },
   },
+  {
+    "saghen/blink.cmp",
+    dependencies = { "rafamadriz/friendly-snippets" },
 
+    version = "1.*",
+
+    opts = {
+      keymap = { preset = "super-tab" },
+      appearance = {
+        nerd_font_variant = "mono",
+      },
+
+      completion = { documentation = { auto_show = true } },
+
+      sources = {
+        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        providers = {
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 100,
+          },
+        },
+      },
+
+      fuzzy = { implementation = "prefer_rust_with_warning" },
+    },
+    opts_extend = { "sources.default" },
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
   {
     "stevearc/conform.nvim",
     opts = {
-      formatters = {
-        stylua = { prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" } },
-      },
       formatters_by_ft = {
         lua = { "stylua" },
         json = { "fixjson" },
@@ -168,52 +67,21 @@ return {
         shell = { "beautysh" },
         yaml = { "prettier" },
         yml = { "prettier" },
-        -- Conform will run multiple formatters sequentially
-        --python = { "isort", "black" },
-        -- Conform will run the first available formatter
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      },
+      formatters = {
+        stylua = {
+          append_args = {
+            "--indent-type",
+            "Spaces",
+            "--indent-width",
+            "2",
+          },
+        },
       },
       format_on_save = {
         timeout_ms = 1000,
         lsp_fallback = true,
       },
     },
-    {
-      "folke/trouble.nvim",
-      opts = {}, -- for default options, refer to the configuration section for custom setup.
-      cmd = "Trouble",
-      keys = {
-        {
-          "<leader>xx",
-          "<cmd>Trouble diagnostics toggle<cr>",
-          desc = "Diagnostics (Trouble)",
-        },
-        {
-          "<leader>xX",
-          "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-          desc = "Buffer Diagnostics (Trouble)",
-        },
-        {
-          "<leader>cs",
-          "<cmd>Trouble symbols toggle focus=false<cr>",
-          desc = "Symbols (Trouble)",
-        },
-        {
-          "<leader>cl",
-          "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-          desc = "LSP Definitions / references / ... (Trouble)",
-        },
-       {
-          "<leader>xL",
-          "<cmd>Trouble loclist toggle<cr>",
-          desc = "Location List (Trouble)",
-        },
-        {
-          "<leader>xQ",
-          "<cmd>Trouble qflist toggle<cr>",
-          desc = "Quickfix List (Trouble)",
-        },
-      },
-    }
   },
 }
