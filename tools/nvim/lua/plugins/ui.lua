@@ -141,11 +141,11 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     config = function()
-      require("lualine").setup({ options = { theme = "base16" } })
+      require("lualine").setup({})
     end,
   }, -- nvim status line
 
-  { -- bufferlines (tabs)
+  {  -- bufferlines (tabs)
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = { "RRethy/base16-nvim", "nvim-tree/nvim-web-devicons" },

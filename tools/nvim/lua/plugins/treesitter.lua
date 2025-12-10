@@ -16,10 +16,10 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "<Leader>is", -- set to `false` to disable one of the mappings
-            node_incremental = "<Leader>ni",
-            scope_incremental = "<Leader>si",
-            node_decremental = "<Leader>nd",
+            init_selection = "<Leader>ss", -- set to `false` to disable one of the mappings
+            node_incremental = "<Leader>si",
+            scope_incremental = "<Leader>sc",
+            node_decremental = "<Leader>sd",
           },
         },
         textobjects = {
@@ -37,7 +37,7 @@ return {
             },
             selection_modes = {
               ["@parameter.outer"] = "v", -- charwise
-              ["@function.outer"] = "V", -- linewise
+              ["@function.outer"] = "V",  -- linewise
               ["@class.outer"] = "<c-v>", -- blockwise
             },
             include_surrounding_whitespace = true,

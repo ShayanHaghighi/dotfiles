@@ -6,7 +6,7 @@ return {
   { "christoomey/vim-tmux-navigator", lazy = false },
   {
     "https://github.com/numToStr/Comment.nvim",
-    event = "VeryLazy", -- Special lazy.nvim event for things that can load later and are not important for the initial UI
+    event = "VeryLazy",
     config = function()
       require("Comment").setup()
     end,
@@ -26,4 +26,24 @@ return {
     "https://github.com/farmergreg/vim-lastplace",
     event = "BufReadPost",
   },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      spec = {
+        { "<leader>f", desc = "find cmds",  group = "Find" },
+        { "<leader>t", desc = "toggle",     group = "Toggle" },
+        { "<leader>s", mode = { 'n', 'v' }, desc = "Select (TreeSitter)", group = "Select (TreeSitter)" },
+      }
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    }
+  }
 }
