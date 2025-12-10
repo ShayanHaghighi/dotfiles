@@ -1,4 +1,4 @@
-command = /bin/zsh
+#command = /bin/zsh
 
 theme = current-theme.conf
 
@@ -16,7 +16,7 @@ background-blur = 200
 background-opacity = 1.0
 
 keybind = ctrl+shift+K=text:clear\x0d
-keybind = ctrl+b=text:cd $(git rev-parse --show-toplevel)\x0d
+keybind = ctrl+shift+b=text:cd $(git rev-parse --show-toplevel)\x0d
 keybind = ctrl+shift+a=text:tmux attach-session\x0d
 
 font-thicken = false

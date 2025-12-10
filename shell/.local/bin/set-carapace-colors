@@ -1,0 +1,50 @@
+
+#!/usr/bin/env bash
+
+# Helper to apply a style
+style() {
+  carapace --style "carapace.$1=$2"
+}
+
+### Core groups ###
+style Description       "dim bright-black"
+style Usage             "bright-cyan"
+style Value             "magenta"
+style Error             "bold black bg-bright-red"
+
+### Flag groups ###
+style FlagNoArg         "bright-white italic"
+style FlagArg           "bright-green bold"
+style FlagOptArg        "bright-cyan bold"
+style FlagMultiArg      "bright-white"
+
+### Keyword states ###
+style KeywordPositive   "bright-green"
+style KeywordNegative   "bright-red"
+style KeywordAmbiguous  "bright-yellow"
+style KeywordUnknown    "magenta"
+
+### Log levels ###
+style LogLevelTrace     "bright-black"
+style LogLevelDebug     "cyan"
+style LogLevelInfo      "bright-cyan"
+style LogLevelWarning   "yellow"
+style LogLevelError     "bright-red"
+style LogLevelCritical  "red"
+style LogLevelFatal     "bold bright-red"
+
+### Aesthetic Highlight gradient (1 → 12) ###
+style Highlight1        "blue"
+style Highlight2        "bright-blue"
+style Highlight3        "cyan"
+style Highlight4        "bright-cyan"
+style Highlight5        "green"
+style Highlight6        "bright-green"
+style Highlight7        "yellow"
+style Highlight8        "bright-yellow"
+style Highlight9        "magenta"
+style Highlight10       "bright-magenta"
+style Highlight11       "bright-white"
+style Highlight12       "white"
+
+echo "Carapace styles applied."

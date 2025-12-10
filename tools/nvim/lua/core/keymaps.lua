@@ -55,11 +55,6 @@ map("n", "<leader>w", ":set spell!<CR>", { desc = "Toggle Spell Check" })
 map("n", "<leader>z", function()
   local count = vim.v.count
 
-  if count == 0 then
-    print("No count specified")
-    return
-  end
-
   vim.o.foldlevel = count
   print("Foldlevel = " .. count)
 end, { desc = "Set foldlevel via count" })

@@ -27,5 +27,3 @@ export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=1
 
-# opencode
-export PATH=/home/shayan/.opencode/bin:$PATH

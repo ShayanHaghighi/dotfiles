@@ -1,0 +1,6 @@
+#!/bin/bash
+
+dpkg-query -Wf '${Installed-Size}\n' \
+| awk -F '\t' '{print ($1 == "" ? 0 : $1) "K"}' \
+| numfmt --from=si --to=si \
+| paste <(dpkg-query -Wf '${Package}\n') - | column -t

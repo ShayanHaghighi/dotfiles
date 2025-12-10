@@ -6,7 +6,7 @@ rewrite = false
 
 
 [[items]]
-file = "$XDG_CONFIG_HOME/tmux/theme.sh"
+file = "$XDG_CONFIG_HOME/tmux/modules/theme.conf"
 template =  "tmux"
 hook = "tmux source-file $XDG_CONFIG_HOME/tmux/tmux.conf"
 rewrite = true
