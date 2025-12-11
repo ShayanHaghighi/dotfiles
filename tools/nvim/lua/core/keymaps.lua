@@ -28,6 +28,15 @@ map("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = "Grep files" })
 map("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "List buffers" })
 map("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "Help tags" })
 
+map("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Help tags" })
+
+map("n", "<leader>fr", function()
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  local root_dir = clients[1] and clients[1].config.root_dir or vim.fn.getcwd()
+
+  vim.cmd(string.format("TodoTelescope cwd=%s", root_dir))
+end, { desc = "List TODOS from root" })
+
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
