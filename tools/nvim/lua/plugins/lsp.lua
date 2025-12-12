@@ -64,9 +64,9 @@ return {
         json = { "fixjson" },
         python = { "black" },
         bash = { "beautysh" },
+        zsh = { "beautysh" },
         shell = { "beautysh" },
         yaml = { "prettier" },
-        yml = { "prettier" },
       },
       formatters = {
         stylua = {

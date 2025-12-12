@@ -12,26 +12,26 @@ right_format="([](fg:surface0)$python[](fg:surface0))"
 
 add_newline=false
 
-# Start flavours
 [palettes.catppuccin_mocha]
-base = "#1e1e2e"
-mantle = "#181825"
-surface0 = "#313244"
-surface1 = "#45475a"
-surface2 = "#585b70"
-text = "#cdd6f4"
-rosewater = "#f5e0dc"
-lavender = "#b4befe"
-red = "#f38ba8"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-blue = "#89b4fa"
-mauve = "#cba6f7"
-flamingo = "#f2cdcd"
-black = "#"
-# End flavours
+base = "black"
+mantle = "black"
+surface0 = "bright-black"
+surface1 = "bright-black"
+surface2 = "bright-black"
+text = "white"
+rosewater = "bright-yellow"
+lavender = "bright-blue"
+red = "red"
+peach = "bright-red"
+yellow = "yellow"
+green = "green"
+teal = "cyan"
+blue = "blue"
+mauve = "magenta"
+flamingo = "bright-white"
+
+
+
 
 [character]
 success_symbol="[](fg:mantle bg:surface0)[](fg:surface0)"

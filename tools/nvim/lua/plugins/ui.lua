@@ -61,7 +61,6 @@ base08 = '#f2cdcd'
     config = function()
       local nvim_tree = require("nvim-tree")
       nvim_tree.setup({
-        on_attach = on_attach,
         update_cwd = true,
         update_focused_file = {
           enable = true,
@@ -145,7 +144,7 @@ base08 = '#f2cdcd'
     end,
   }, -- nvim status line
 
-  {  -- bufferlines (tabs)
+  { -- bufferlines (tabs)
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = { "RRethy/base16-nvim", "nvim-tree/nvim-web-devicons" },

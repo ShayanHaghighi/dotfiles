@@ -1,12 +1,8 @@
 
-[[items]]
-file = "$XDG_CONFIG_HOME/starship/starship.toml"
-template =  "starship"
-rewrite = false
 
 
 [[items]]
-file = "$XDG_CONFIG_HOME/tmux/modules/theme.conf"
+file = "$XDG_CONFIG_HOME/tmux/modules/setup/theme.conf"
 template =  "tmux"
 hook = "tmux source-file $XDG_CONFIG_HOME/tmux/tmux.conf"
 rewrite = true

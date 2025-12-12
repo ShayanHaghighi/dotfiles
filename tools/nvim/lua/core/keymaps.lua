@@ -12,6 +12,8 @@ map("n", "<C-u>", "<C-u>zz", { noremap = true })
 
 -- SPLITS N TABS
 
+map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle file tree" })
+
 map("n", "<C-t>", ":tabnew<CR>", { desc = "New Tab" })
 map("n", "<C-s>", ":w<CR>", { desc = "Save" })
 map("n", "<leader>q", ":wqa<CR>", { desc = "Close Tab" })
@@ -19,11 +21,9 @@ map("n", "<leader>q", ":wqa<CR>", { desc = "Close Tab" })
 map("n", "<leader>v", ":vsplit<CR>", { desc = "Vertical Split" })
 map("n", "<leader>h", ":split<CR>", { desc = "Horizontal Split" })
 
--- PLUGINS
+-- SEARCHING
 
-map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle file tree" })
-
-map("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Find files" })
+map("n", "<leader>ff", ":Telescope find_files theme=ivy<CR>", { desc = "Find files" })
 map("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = "Grep files" })
 map("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "List buffers" })
 map("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "Help tags" })
@@ -33,14 +33,12 @@ map("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Help tags" })
 map("n", "<leader>fr", function()
   local clients = vim.lsp.get_clients({ bufnr = 0 })
   local root_dir = clients[1] and clients[1].config.root_dir or vim.fn.getcwd()
-
   vim.cmd(string.format("TodoTelescope cwd=%s", root_dir))
 end, { desc = "List TODOS from root" })
 
-map("v", "J", ":m '>+1<CR>gv=gv")
-map("v", "K", ":m '<-2<CR>gv=gv")
+-- DIAGNOSTICS AND LSP
 
--- DIAGNOSTICS
+map("n", "<leader>m", ":Mason<CR>", { desc = "Open Mason" })
 
 map("n", "<leader>td", function()
   local current = vim.diagnostic.is_enabled()
@@ -77,3 +75,6 @@ map({ "n", "v" }, "<Leader>x", ":close<CR>", { desc = "close window" })
 
 map("v", "gi", "g<C-a>", { noremap = true, silent = true, desc = "Increment sequence" })
 map("v", "gd", "g<C-x>", { noremap = true, silent = true, desc = "Decrement sequence" })
+
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
