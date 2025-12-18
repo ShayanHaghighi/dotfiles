@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# print_hex.sh
+# Usage: ./print_hex.sh "#FF00AA"
+
+if [ -z "$1" ]; then
+  echo "Usage: $0 <hex-color>"
+  exit 1
+fi
+
+HEX="$1"
+
+# Remove leading '#' if present
+HEX="${HEX#"#"}"
+
+# Validate hex color
+if ! [[ "$HEX" =~ ^[0-9A-Fa-f]{6}$ ]]; then
+  echo "Invalid hex color. Use format: #RRGGBB"
+  exit 1
+fi
+
+# Split hex into RGB components
+R=$((16#${HEX:0:2}))
+G=$((16#${HEX:2:2}))
+B=$((16#${HEX:4:2}))
+
+# Print a colored block in the terminal
+# 48;2;R;G;Bm → background color
+# 38;2;R;G;Bm → foreground color
+echo -e "\e[48;2;${R};${G};${B}m        \e[0m  #$HEX"

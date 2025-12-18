@@ -1,8 +1,38 @@
 #!/bin/bash
-for i in {30..37}; do
-    printf "\e[%sm Color %s \e[0m\n" "$i" "$i"
+
+# Normal ANSI colors 30–37
+names_normal=(
+  "black"
+  "red"
+  "green"
+  "yellow"
+  "blue"
+  "magenta"
+  "cyan"
+  "white"
+)
+
+# Bright ANSI colors 90–97
+names_bright=(
+  "bright black"
+  "bright red"
+  "bright green"
+  "bright yellow"
+  "bright blue"
+  "bright magenta"
+  "bright cyan"
+  "bright white"
+)
+
+echo "Normal ANSI Colors:"
+for i in {0..7}; do
+    code=$((30 + i))
+    printf "\e[%sm %-13s (%s) \e[0m\n" "$code" "${names_normal[$i]}" "$code"
 done
 
-for i in {90..97}; do
-    printf "\e[%sm Bright %s \e[0m\n" "$i" "$i"
+echo
+echo "Bright ANSI Colors:"
+for i in {0..7}; do
+    code=$((90 + i))
+    printf "\e[%sm %-13s (%s) \e[0m\n" "$code" "${names_bright[$i]}" "$code"
 done
