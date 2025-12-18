@@ -26,4 +26,4 @@ export CHEAT_CONFIG_PATH="$XDG_CONFIG_HOME/cheat/conf.yml"
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=1
-
+export PATH="$PATH:/home/shayan/.cargo/bin"

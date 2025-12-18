@@ -30,13 +30,32 @@ map("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "Help tags" })
 
 map("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Help tags" })
 
-map("n", "<leader>fr", function()
+local function get_root()
   local clients = vim.lsp.get_clients({ bufnr = 0 })
-  local root_dir = clients[1] and clients[1].config.root_dir or vim.fn.getcwd()
-  vim.cmd(string.format("TodoTelescope cwd=%s", root_dir))
+  return clients[1] and clients[1].config.root_dir or vim.fn.getcwd()
+end
+
+
+map("n", "<leader>fr", function()
+  vim.cmd(string.format("TodoTelescope cwd=%s", get_root()))
 end, { desc = "List TODOS from root" })
 
 -- DIAGNOSTICS AND LSP
+-- this is some text wit bad grammar
+-- TODO: FIX
+local function toggle_lsp(lsp_client)
+  local clients = vim.lsp.get_clients()
+  local client = clients[lsp_client]
+  if client ~= nil then
+    client.stop(false)
+  else
+    vim.lsp.enable(lsp_client, true)
+  end
+end
+
+map("n", "<Leader>tg", function()
+  toggle_lsp('harper_ls')
+end, { desc = "Toggle harper_ls" })
 
 map("n", "<leader>m", ":Mason<CR>", { desc = "Open Mason" })
 

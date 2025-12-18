@@ -32,12 +32,21 @@ return {
     event = "BufReadPost",
   },
   {
+    "johmsalas/text-case.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("textcase").setup({ prefix = 'gr' })
+      require("telescope").load_extension("textcase")
+    end,
+    lazy = false,
+  },
+  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
       spec = {
-        { "<leader>f", desc = "find cmds", group = "Find" },
-        { "<leader>t", desc = "toggle", group = "Toggle" },
+        { "<leader>f", desc = "find cmds",  group = "Find" },
+        { "<leader>t", desc = "toggle",     group = "Toggle" },
         { "<leader>s", mode = { "n", "v" }, desc = "Select (TreeSitter)", group = "Select (TreeSitter)" },
       },
     },
