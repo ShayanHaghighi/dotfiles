@@ -25,7 +25,7 @@ map("n", "<leader>h", ":split<CR>", { desc = "Horizontal Split" })
 
 map("n", "<leader>ff", ":Telescope find_files theme=ivy<CR>", { desc = "Find files" })
 map("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = "Grep files" })
-map("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "List buffers" })
+map("n", "<leader>fb", ":Telescope buffers<CR>theme=ivy<CR>", { desc = "List buffers" })
 map("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "Help tags" })
 
 map("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Help tags" })
@@ -35,6 +35,9 @@ map("n", "<leader>fr", function()
   local root_dir = clients[1] and clients[1].config.root_dir or vim.fn.getcwd()
   vim.cmd(string.format("TodoTelescope cwd=%s", root_dir))
 end, { desc = "List TODOS from root" })
+
+-- map("n","<leader>d", )
+map("n", "<CR>", ":noh<CR>")
 
 -- DIAGNOSTICS AND LSP
 

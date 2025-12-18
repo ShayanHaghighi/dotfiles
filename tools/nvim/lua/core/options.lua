@@ -12,7 +12,6 @@ vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.o.smartcase = true
 vim.o.ignorecase = true
-vim.o.hlsearch = false
 vim.diagnostic.config({
   virtual_text = { virt_text_pos = "right_align" },
   virtual_lines = false,
