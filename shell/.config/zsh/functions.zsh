@@ -8,16 +8,26 @@ ll(){
 }
 
 lt(){
-    eval "eza -T -L ${1:-15} --color=always --icons=always --git-ignore | batcat"
+
+    re='^[0-9]+$'
+    depth=15
+    other_args=""
+    if [[ $1 =~ $re ]] ; then
+        depth=$1
+    else
+        other_args=$1
+    fi
+
+    eval "eza -T -L $depth --color=always --icons=always --git-ignore  $other_args | batcat"
 }
 ltl(){
-    eval "eza -Tlh -L ${1:-15} --color=always --icons=always --git-ignore | batcat"
+    lt "-l"
 }
 
 function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
 }
