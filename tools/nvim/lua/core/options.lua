@@ -11,8 +11,8 @@ vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
-vim.o.smartcase = true
-vim.o.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.ignorecase = true
 vim.diagnostic.config({
   virtual_text = { virt_text_pos = "right_align" },
   virtual_lines = false,
