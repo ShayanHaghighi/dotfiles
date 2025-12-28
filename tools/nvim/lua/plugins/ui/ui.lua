@@ -1,5 +1,34 @@
 return {
+    {
+        "stevearc/dressing.nvim",
+        opts = {
 
+            select = {
+                -- Set to false to disable the vim.ui.select implementation
+                enabled = true,
+
+                -- Priority list of preferred vim.select implementations
+                backend = { "telescope", "fzf_lua", "fzf", "builtin", "nui" },
+
+                -- Trim trailing `:` from prompt
+                trim_prompt = true,
+
+                -- Options for telescope selector
+                -- These are passed into the telescope picker directly. Can be used like:
+                -- telescope = require('telescope.themes').get_ivy({...})
+                telescope = nil,
+            }
+        },
+    },
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' }, -- if you use the mini.nvim suite
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' }, -- if you use standalone mini plugins
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = { render_modes = { 'n', 'c', 't', 'i', 'v' }, preset = 'obsidian' },
+    },
     {
         "HiPhish/rainbow-delimiters.nvim",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -12,6 +41,8 @@ return {
             keymaps = {
                 ["<Tab>"] = "actions.select",
                 ["<S-Tab>"] = { "actions.parent", mode = "n" },
+                ["C-r"] = "actions.refresh",
+                ["C-l"] = false
             }
         },
         dependencies = { { "nvim-mini/mini.icons", opts = {} } },

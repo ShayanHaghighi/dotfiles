@@ -36,29 +36,32 @@ local function get_root()
 end
 
 
-map("n", "<leader>fr", function()
-  vim.cmd(string.format("TodoTelescope cwd=%s", get_root()))
-end, { desc = "List TODOS from root" })
+map("n", "<ESC>", ":noh<CR>", { noremap = false })
 
--- map("n","<leader>d", )
-map("n", "<CR>", ":noh<CR>")
 
--- DIAGNOSTICS AND LSP
--- this is some text wit bad grammar
--- TODO: FIX
-local function toggle_lsp(lsp_client)
-  local clients = vim.lsp.get_clients()
-  local client = clients[lsp_client]
-  if client ~= nil then
-    client.stop(false)
-  else
-    vim.lsp.enable(lsp_client, true)
+local function toggle_lsp(name)
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+    if client.name == name then
+      vim.lsp.buf_detach_client(bufnr, client.id)
+      print("detached", name)
+      return
+    end
   end
+
+  vim.lsp.start(vim.tbl_extend("force", vim.lsp.config[name], {
+    name = name,
+  }))
+
+  print("started & attached", name)
 end
 
 map("n", "<Leader>tg", function()
-  toggle_lsp('harper_ls')
-end, { desc = "Toggle harper_ls" })
+  toggle_lsp('ltex_plus')
+end, { desc = "Toggle Grammar Checks" })
+
+map("n", "<leader>tt", ":lua require('toggle-checkbox').toggle()<CR>", { desc = "Toggle Checkbox" })
 
 map("n", "<leader>m", ":Mason<CR>", { desc = "Open Mason" })
 map("n", "<leader>l", ":Lazy<CR>", { desc = "Open Lazy" })
@@ -82,12 +85,21 @@ map("n", "<leader>w", ":set spell!<CR>", { desc = "Toggle Spell Check" })
 
 -- FOLDS
 
-map("n", "<leader>z", function()
-  local count = vim.v.count
 
-  vim.o.foldlevel = count
-  print("Foldlevel = " .. count)
-end, { desc = "Set foldlevel via count" })
+map('n', 'z0', ":set foldlevel=0<CR>", { desc = "Set foldlevel to 0" })
+
+map('n', 'zi', function()
+  vim.o.foldlevel = vim.o.foldlevel + 1
+  print("foldlevel = " .. vim.o.foldlevel)
+end, { desc = "Increment foldlevel" })
+
+map('n', 'zd', function()
+  vim.o.foldlevel = vim.o.foldlevel - 1
+  print("foldlevel = " .. vim.o.foldlevel)
+end, { desc = "Decrement foldlevel" })
+
+map('n', 'zu', 'zR', { desc = "Undo All Folds" })
+
 
 -- MISC
 
@@ -101,3 +113,6 @@ map("v", "gd", "g<C-x>", { noremap = true, silent = true, desc = "Decrement sequ
 
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
+
+map("v", "<", "<gv")
+map("v", ">", ">gv")
