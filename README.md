@@ -6,20 +6,25 @@ cd dotfiles
 ```
 
 # Tools I Use:
-- stow (apt)
-- starship (curl install)
-- carapace (manual, but curl/apt exists)
-- init recursive submodules for zsh plugins
-- fzf (apt)
-- nvim (manual)
-- eza (apt, but manual for higher version)
-- tpm (command install)
-- gitmux (manual/go)
-- lazygit (manual for lower ubuntu versions)
-- xclip (apt)
-- zoxide (curl)
-- cheat (curl)
-- tree-sitter-cli (npm)
-- latexmk
-- lualatex
-- pandoc
+| Tool | Install Method |
+| - | - |
+| stow |apt|
+| latexmk | apt |
+| lualatex | apt |
+| pandoc | apt |
+| fzf |apt|
+| xclip |apt|
+| eza |apt, but manual for higher version|
+| starship |curl install|
+| carapace |manual, but curl/apt exists|
+| nvim |manual (binary)|
+| tpm |command install|
+| gitmux |manual/go|
+| lazygit |manual for lower ubuntu versions|
+| zoxide |curl|
+| cheat |curl|
+| tree-sitter-cli |npm|
+| tmuxinator |gem|
+
+
+

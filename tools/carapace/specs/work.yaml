@@ -1,0 +1,7 @@
+# /carapace/overlays/doctl.yaml
+name: work
+completion:
+  positionalany:
+    [
+      "$( eza --icons=never /home/shayan/.config/tmuxinator | sed 's/\\.yml$//' )",
+    ]
