@@ -23,6 +23,7 @@ return {
         zsh = { "beautysh" },
         shell = { "beautysh" },
         yaml = { "prettier" },
+        css = { "prettier" },
       },
       formatters = {
         stylua = {

@@ -41,8 +41,9 @@ return {
             keymaps = {
                 ["<Tab>"] = "actions.select",
                 ["<S-Tab>"] = { "actions.parent", mode = "n" },
-                ["C-r"] = "actions.refresh",
-                ["C-l"] = false
+                ["<C-r>"] = "actions.refresh",
+                ["<C-l>"] = false,
+                ["<C-h>"] = false
             }
         },
         dependencies = { { "nvim-mini/mini.icons", opts = {} } },
@@ -92,6 +93,9 @@ return {
                 { "<leader>t", desc = "toggle",     group = "Toggle" },
                 { "<leader>s", mode = { "n", "v" }, desc = "Select (TreeSitter)", group = "Select (TreeSitter)" },
             },
+            plugins = {
+                registers = false,
+            }
         },
         keys = {
             {

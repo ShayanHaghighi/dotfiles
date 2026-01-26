@@ -7,7 +7,7 @@ return {
           lualine_a = { 'mode' },
           lualine_b = { 'branch', 'diff' },
           lualine_c = { '' },
-          lualine_x = { 'diagnostics', 'lsp_status' },
+          lualine_x = { 'diagnostics', 'lsp_status', 'filetype' },
           lualine_y = { 'location', 'progress', },
           lualine_z = {
             {

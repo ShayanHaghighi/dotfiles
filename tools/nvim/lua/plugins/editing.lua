@@ -1,7 +1,7 @@
 return {
-  {
-    "opdavies/toggle-checkbox.nvim"
-  },
+  -- {
+  --   "opdavies/toggle-checkbox.nvim"
+  -- },
   {
     "nvim-treesitter/nvim-treesitter-context",
     opts = {
@@ -56,15 +56,19 @@ return {
   },
   {
     "https://github.com/windwp/nvim-autopairs",
+    -- not ideal, but since this remaps <CR>, it needs to
+    -- load first as to not overwrite the autolist keymap
+    lazy = false,
     event = "InsertEnter",
     config = function()
-      require("nvim-autopairs").setup()
+      require("nvim-autopairs").setup({
+        disable_filetype = { "markdown" },
+      })
     end,
   },
   {
     "gaoDean/autolist.nvim",
     ft = {
-
       "markdown",
       "text",
       "tex",
@@ -81,6 +85,7 @@ return {
       vim.keymap.set("n", "o", "o<cmd>AutolistNewBullet<cr>")
       vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>")
       vim.keymap.set("n", "<CR>", "<cmd>AutolistToggleCheckbox<cr><CR>", { noremap = false })
+      vim.keymap.set("n", "<leader>tt", "<cmd>AutolistToggleCheckbox<cr>", { noremap = false })
       vim.keymap.set("n", "<C-r>", "<cmd>AutolistRecalculate<cr>")
 
       -- cycle list types with dot-repeat
